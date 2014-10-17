@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+    <title>R&D Playlist</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+</head>
+<body>
+<!--search-->
+<div class="container">
+    <div align="center">
+        {% if name %}
+        <h1>Hello {{ name }}, pick your song</h1>
+        {% else %}
+        <h1>Pick your song</h1>
+        {% endif %}
+
+        <form>
+            <input type="search" id="searchbox">
+            <button type="button" id="searchbutton" autofocus>Search</button>
+            <p id="searchresult"></p>
+        </form>
+    </div>
+    </div>
+<!--end search-->
+
+<!--start jQuery script-->
+<script>
+    $("#searchbutton").click(function() {
+        var search = $("#searchbox").val();
+        $("#searchresult").text("Search result for: "+search);
+    });
+</script>
+<!--end jQuery script-->
+</body>
+</html>

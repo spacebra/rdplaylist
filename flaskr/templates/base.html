@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+    <head>
+        <title>R&D Playlist</title>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    </head>
+<body>
+<div align="center">
+    {% if name %}
+    <h1>Hello {{ name }}, pick your song</h1>
+    {% else %}
+    <h1>Pick your song</h1>
+    {% endif %}
+
+    <form>
+        <input type="search" id="search_box">
+        <button type="button" id="search_button" autofocus>Search</button>
+        <div id="search_word"></div>
+        <div id="search_result">
+            <ul>
+                <li></li>
+            </ul>
+        </div>
+    </form>
+</div>
+<script>
+    $("#search_button").click(function() {
+        var word = $("#search_box").val();
+        $("#search_word").text(word);
+        var request = $.ajax({
+            url : '/search/' + word,
+            type : 'GET'
+        });
+
+        function showData(data) {
+            console.log('hi');
+        }
+
+        function showError() {
+            console.log('try again');
+        }
+
+        request.done(function(data) {
+            console.log(data);
+            if (data) {
+                showData(data);
+            } else {
+                showError();
+            }
+        });
+        request.fail(function(jqXHR, textStatus) {
+            showError();
+        });
+
+});
+</script>
+</body>
+</html>
